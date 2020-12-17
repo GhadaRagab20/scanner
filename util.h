@@ -9,7 +9,9 @@
 #define UTIL_H_
 
 
-void printToken(TokenType,const char*);
+
+
+void printToken (TokenType token, const char* tokenString);
 
 TreeNode* newStmtNode(StmtKind);
 

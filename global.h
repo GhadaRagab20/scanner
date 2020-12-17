@@ -29,11 +29,12 @@ typedef enum
  ASSIGN,EQ,LT,PLUS,MINUS,TIMES,OVER,LPAREN,RPAREN,SEMI
 }TokenType;
 
-extern FILE* source;
+//FILE* source;
 extern FILE* listing;
+
 extern FILE* code;
 
- int lineno;
+extern int lineno;
 
 /*Syntax Tree for parsing*/
 typedef enum  {StmtK,ExpK} NodeKind;
@@ -46,7 +47,7 @@ typedef enum  {Void,Integer,Boolean} ExpType;
 typedef struct treeNode{
 	struct treeNode *child[MAXCHELDREN];
 	struct treeNode *sibling;
-	int lineno;
+	int Lineno;
 	NodeKind nodekind;
 	union{ StmtKind stmt;ExpKind exp;}Kind;
 	union{ TokenType op;int val;char* name;}attr;
@@ -56,7 +57,7 @@ typedef struct treeNode{
 
 extern int EchoSources;
 
-extern int TraceScan;
+//extern int TraceScan;
 
 extern int traceParse;
 

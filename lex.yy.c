@@ -9,7 +9,7 @@
 #define YY_FLEX_MINOR_VERSION 5
 
 #include <stdio.h>
-//#include "global.h"
+
 
 /* cfront 1.2 defines "c_plusplus" instead of "__cplusplus" */
 #ifdef c_plusplus
@@ -404,6 +404,8 @@ char *yytext;
 #include "util.h"
 #include "scan.h"
 char tokenString[MAXTOKENLEN+1];
+int lineno=0;
+FILE* listing = (FILE *) 0;
 #line 408 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
@@ -1660,23 +1662,22 @@ int main()
 #endif
 #line 52 "Tiny.l"
 
-
 TokenType getToken(void)
 { static int firstTime =TRUE;
 TokenType currentToken;
 if (firstTime)
 {firstTime =FALSE;
 lineno++;
-yyin=fopen("Tiny.text","r");
+yyin=fopen("Tiny.txt","r");
 yyout=fopen("result.text","W+");
 listing =yyout;
 }
 currentToken =yylex();
 strncpy(tokenString,yytext,MAXTOKENLEN);
-//if(TraceScan) {
+
   fprintf(listing,"\t%d:",lineno);
   printToken(currentToken,tokenString);
-//}
+
   return currentToken;
 }
 int yywrap(){return 1;};
